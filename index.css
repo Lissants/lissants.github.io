@@ -1,0 +1,87 @@
+header{
+  /*Styling the Page's Title*/
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /*Dark Red Color for Light Mode user because it is contrasted to the page's background color*/
+  color:darkred;
+}
+
+body{
+  /*Default Page Background Color for Light Mode User*/
+  background-color: blanchedalmond;
+}
+
+header{
+  /*Aligning the Page's Title to Center*/
+  text-align: center;
+}
+
+.recipe-group{
+  /*Setting left and right margin to ensure content stay in center*/
+  margin-left: 37%;
+  margin-right: 37%;
+}
+
+.recipe-group img{
+  /*Setting the image's width and height, as well a little margin between the image
+  and the first horizontal rule bar*/
+  width: 350px;
+  height: 350px;
+  margin-top: 2%;
+}
+
+.recipe-detail{
+  /*Styling the paragraphs used in Recipe Detail Class*/
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: darkred;
+  font-size: 15pt;
+}
+
+.recipe-detail p{
+  /*Setting the "Vertical Line Spacing" of the Paragraph*/
+  margin: 2%;
+}
+
+.recipe-detail a{
+  color: darkred;
+}
+
+.recipe-detail a:visited{
+  color: brown;
+}
+
+.recipe-detail a:hover{
+  color: darkblue;
+}
+
+footer{
+  /*Styling the Footer*/
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 11pt;
+  color: darkred;
+  text-align: center;
+}
+
+/*Styles for Dark Mode User*/
+@media (prefers-color-scheme: dark){
+  body{
+    background-color: rgb(0, 0, 0);
+  }
+  header{
+    color: blanchedalmond;
+  }
+  .recipe-detail{
+    color: blanchedalmond;
+  }
+  .recipe-detail a{
+    color:blanchedalmond;
+  }
+  .recipe-detail a:visited{
+    color: antiquewhite;
+  }
+  .recipe-detail a:hover{
+    color: darkred;
+  }
+  footer{
+    color: blanchedalmond;
+  }
+}
