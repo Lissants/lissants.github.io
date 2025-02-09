@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grandma's Lemon Meringue Pie</title>
+    <!--Load the style from separate CSS file-->
+    <link rel="stylesheet" href="recipe.css"/>
+  </head>
+
+  <body>
+     <!--Assign class to style the Main Heading-->
+    <section class="main-heading">
+      <h1>Grandma's Lemon Meringue Pie</h1>
+    </section>
+
+    <section class="pie-description">
+       <!--Alternative Text and Title for Screen Reader Users-->
+      <img src="assets/lemon-meringue-pie.jpg" alt="Lemon Meringue Pie Recipe" title="Lemon Meringue Pie">
+
+      <article>
+        <p>One 9-inch pie</p>
+        <p>30 Min - Prep time</p>
+        <p>10 Min - Cook time</p>
+        <p>40 Min - Total</p>
+        <p>8 Servings</p>
+      </article>
+    </section>
+
+    <hr>  <!--Horizontal Rule Usage to break down the Sections-->
+
+    <section>
+       <!--Assign other headings into one class to simplify styling-->
+      <h2 class="other-heading">INGREDIENTS</h2>
+      <article class="default-text">
+        <ul>
+          <li>1 cup all-purpose flour</li>
+           <!--Uses Span Element to separately style the Tbsp and Tsp-->
+          <li>2 <span class="spoons-metric">tbsp</span> white sugar</li>
+          <!--Replaced 1 cup of sugar and 2tbsp of AP flour into 1 cup of AP flour and 2tbsp of sugar to avoid Diabetes-->
+          <li>3 <span class="spoons-metric">tbsp</span> cornstarch</li>
+          <li>1/4 <span class="spoons-metric">tsp</span> salt</li>
+          <li>1 1/2 cups water</li>
+          <li>2 lemons, juiced and zested</li>
+          <li>2 <span class="spoons-metric">tbsp</span> butter</li>
+          <li>4 egg yolks, beaten</li>
+          <li>1 (9 inch) pie crust, baked</li>
+          <li>4 egg whites</li>
+          <li>6 <span class="spoons-metric">tbsp</span> white sugar</li>
+        </ul>
+      </article>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2 class="other-heading">DIRECTIONS</h2>
+       <!--Assign all the text in the page into one class to simplify styling-->
+      <article class="default-text">
+        <ol>
+          <li><strong>Preheat Oven:</strong> Preheat oven to 350 degrees F (175 degrees C)</li>
+          <li><strong>Make Lemon Filling:</strong> In a medium saucepan...</li>
+            <ul class="cooking-steps">  <!--Unordered List Inside Ordered List to achieve the Bullet Points Inside Cooking Step-by-Steps-->
+              <li>Whisk together 1 cup sugar, flour, cornstarch, and salt.</li>
+              <li>Stir in water, lemon juice and lemon zest.</li>
+              <li>Cook over medium-high heat, stirring frequently, until mixture comes to a boil.</li>
+              <li>Stir in butter.</li>
+              <li>Place egg yolks in a small bowl and gradually whisk in 1/2 cup of hot sugar mixture.</li>
+              <li>Whisk egg yolk mixture back into remaining sugar mixture.</li>
+              <li>Bring to a boil and continue to cook while stirring constantly until thick.</li>
+              <li>Remove from heat.</li>
+              <li>Pour filling into baked pastry shell.</li>
+            </ul>
+          <li><strong>Make Meringue:</strong>In a large glass or metal bowl...</li>
+            <ul class="cooking-steps">
+              <li>Whip egg whites until foamy.</li>
+              <li>Add sugar gradually, and continue to whip until stiff peaks form.</li>
+              <li>Spread meringue over pie, sealing the edges at the crust.</li>
+            </ul>
+          <li><strong>Bake:</strong> Bake in preheated oven for 30 minutes, or until meringue is golden brown.</li>
+        </ol>
+         <!--Inline Strikethrough usage to achieve the intended pun-->
+        <p>This is our favorite recipe here at Granny's Pies. It has been enjoyed by pie fans for many years. It's Granny's favorite! We hope you'll find that this recipe is delicious and also easy to follow; it's a piece of <s>cake</s> pie!</p>
+      </article>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2 class="other-heading">USER COMMENTS</h2>
+       <!--Uses Blockquote Element to achieve the Indented Block Effect-->
+      <blockquote class="user-comments">
+        This is a very fun recipe to followm because Grandma makes it sweet and simple. This pie is thickened with cornstarch and flour in addition to egg yolks, and contains no milk.<br></br>
+        - Allister Totong
+      </blockquote>
+
+      <blockquote class="user-comments">
+        Q: What do you call an ape who loves pie? </br>
+        A: A meringue-utan </br></br>
+        - Ryufath Alief A.P. Soepeno
+      </blockquote>
+
+      <blockquote class="user-comments">
+        This site can really <strong>engage</strong> my interest. Follow the recipe abve and <strong>make it so!</strong> This pie is <strong>number one.</strong><br></br>
+        - Andi M. Imam Akbar
+      </blockquote class="user-comments">
+    </section>
+
+    <hr>
+    
+    <section class="links">
+      <h2 class="other-heading">LINKS</h2>
+       <!--Target set to _blank to allow user open the first link on another tab-->
+      <a href="http://www.google.com/search?q=lemon+meringue+pie+recipe&start=10" target="_blank">Search for other lemon meringue pie recipes</a></br>
+      <a href="index.html">Home</a>
+    </section>
+
+    <footer>
+      <article>
+         <!--Usage of HTML Entity Name Replacing Special Characters
+         Without worrying about XSS attack-->
+        <p>Copyright &copy; 2012 Granny's Pies</p>
+        <p>A Granny's Pies Production</p>
+        <p>All rights reserved</p>
+      </article>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+body{
+  /*Setting left and right margin so the content located in the center of the page*/
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.main-heading{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 22pt;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  color: #A4A400;
+  background-color: #F0F0F0;
+}
+
+.pie-description img{
+  /*Setting the bottom margin to give some space before the Recipe Description*/
+  width: 150px;
+  height: 150px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.pie-description p{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 11pt;
+  color: #404040;
+  margin: 0;
+}
+
+.other-heading{
+  /*Use One class to simplify styling for every headings other than the Main one*/
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18pt;
+  font-weight: normal;
+  text-align: left;
+  text-decoration: underline;
+  color: #A4A400;
+  background-color: #F0F0F0;
+}
+
+.default-text{
+  /*Use One class to simplify styling for every text*/
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 11pt;
+  color: #404040;
+  margin: 0;
+}
+
+.spoons-metric{
+  /*Apply underline to the Tsp and Tbsp in Ingredient Measurements*/
+  text-decoration: underline;
+}
+
+.cooking-steps{
+  /*Remove the default unordered list pointer which is bullet point*/
+  list-style-type: none;
+}
+
+.cooking-steps li::before{
+  /*Replace the bullet point with a dash "-"*/
+  content: "- ";
+  padding: 5px;
+}
+
+.user-comments{
+  /*One styling rule for all the user comments*/
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 11pt;
+  font-style: italic;
+  background-color: #FFFFC8;
+}
+
+.links a{
+  /*One styling rule for all the hyperlinks*/
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 11pt;
+  color:#A4A400;
+}
+
+.links a:hover{
+  /*Different Color so users are aware if they are hovering a link*/
+  color: darkgreen;
+}
+
+footer{
+  /*Split the styling for footer and its text to reap both benefits from float
+  and 0 margin altogether*/
+  float: left;
+  margin-top: 2%;
+}
+
+footer p{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 11pt;
+  text-align: right;
+  color: #404040;
+  margin: 0;
+}
