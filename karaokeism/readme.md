@@ -9,8 +9,8 @@ Website Features:
 - Profile page where user can read and update the details of their own profile including the profile picture, their displayed name, their location, age, and biography.
 - Sticky navigation bar at the top of the site that contains link to user profile, the site logo which redirects user to the site's home page, a search bar, and a sign out button.
 
-Github Repository Link for this project: https://github.com/Lissants/lissants-hw2
-You can view the live version of the site here: https://lissants.github.io/karaokeism/
+[Github Repository Link for this project](https://github.com/Lissants/lissants-hw2)
+You can view the [live version of the site here](https://lissants.github.io/karaokeism/)
 
 
 1. This project consists of 2 HTML files which is index.html that is used to display the main page of the website and profile.html that is used to display the second page of the website which is the profile page.
