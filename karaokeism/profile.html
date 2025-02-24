@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Karaokeism | Your Profile</title>
+    <!-- Importing Stylesheet and Assets -->
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/utility-styles.css">
+    <link rel="icon" href="assets/monogram-hq.png">
+
+    <!-- Importing Icons from fontawesome.com -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Importing Google Font - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation Bar Section -->
+    <header>
+      <nav>
+        <ul class="navbar">
+          <li class="navbar-left">
+            <a href="/profile.html">
+              <div class="profile-picture-container">
+                <img src="assets/franz-ferdinand.jpg" alt="Profile Picture">
+              </div>
+              <p>Archduke Franz Ferdinand</p>
+            </a>
+          </li>
+    
+          <li class="navbar-center">
+            <a href="index.html">
+              <img src="assets/monogram-hq.png" alt="Karaokeism Logo" class="logo-container">
+            </a>
+          </li>
+
+          <li class="navbar-right">
+            <div class="search-bar-container">
+              <form action="#" method="get">
+                <input type="text" placeholder="Search..." class="search-bar" aria-label="Search">
+                <button type="submit" class="search-icon">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+              </form>
+            </div>
+
+            <div>
+              <button class="signout-btn" aria-label="Sign Out">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign Out
+              </button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section id="hero-banner">
+      <div class="hero-banner">
+        <h1>Welcome to Karaokeism</h1>
+        <p>A place to <span>Connect</span> with Fellow Karaoke Enthusiast</p>
+      </div>
+    </section>
+
+    <!-- User Profile Section -->
+    <section id="user-profile">
+      
+      <div class="main-container">
+        <div class="profile-container">
+          <img src="assets/franz-ferdinand.jpg" alt="Archduke Franz Ferdinand Profile Picture">
+        </div>
+        <div class="profile-text-container">
+          <h1>Archduke Franz Ferdinand</h1>
+          <h3>21, Indonesia</h3>
+          <strong>Joined February 2025</strong>
+          <p>Amidst the scorching heat of the equator sun burn and the endless hustle
+            to keep ample nutrition on the table, Karaoke alone is my sole saviour.
+          </p>
+        </div>
+      </div>
+
+    <!-- User Post Section -->
+    <section id="user-post">
+      <div class="main-container">
+          <div class="post-profile-picture-container">
+            <img src="assets/franz-ferdinand.jpg" alt="Profile Picture">
+            <div class="display-name">Archduke Franz Ferdinand</div>
+          </div>
+          
+          <!-- User Post Container -->
+          <div class="post-container">
+            <div class="post-text">
+              Done some recording today! Super excited about the upcoming event~
+              Any advices are welcome!
+              <br><br>Song: Every Heart by BoA (InuYasha Ending 4) covered by me!
+              #NewbieKaraoke
+            </div>
+            
+            <!-- Media Container in post, accommodating user that posts with media such as images or videos -->
+            <div class="media-container">
+              <video controls alt="Archduke Franz Ferdinand Video Upload">
+                <source src="https://files.catbox.moe/ot0xa1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <!-- Like and Comment Button in User Post -->
+            <div class="buttons-container">
+              <button>
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span>Like</span>
+              </button>
+              <button>
+                <i class="fa-solid fa-comment"></i>
+                <span>Comment</span>
+              </button>
+            </div>
+            
+            <!-- User Comments Container -->
+            <div class="comments-container">
+              <div class="comment">
+                <img src="assets/Donke.png" alt="Commentor Profile Picture">
+                <div class="comment-content">
+                  <div class="commentor-name">Le Donkey</div>
+                  <div class="comment-text">That's very cool! I love that song as well!</div>
+                  <a href="#" class="like-link">Like</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="comments-container">
+              <div class="comment">
+                <img src="assets/liyuu.jpg" alt="Commentor Profile Picture">
+                <div class="comment-content">
+                  <div class="commentor-name">Girl A</div>
+                  <div class="comment-text">The event is totally worth the wait even if it got hosted
+                    once every two months! Can't wait for it too!
+                  </div>
+                  <a href="#" class="like-link">Like</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comments text input and buttons -->
+            <div class="comment-input-container">
+              <img src="assets/franz-ferdinand.jpg" alt="Profile Picture">
+              <input type="text" placeholder="Write a comment...">
+              <button><i class="fa-solid fa-image"></i></button>
+              <button><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </section>
+
+
+    <!-- User Post Section -->
+    <section id="user-post">
+      <div class="main-container">
+          <div class="post-profile-picture-container">
+            <img src="assets/franz-ferdinand.jpg" alt="Profile Picture">
+            <div class="display-name">Archduke Franz Ferdinand</div>
+          </div>
+          
+          <!-- User Post Container -->
+          <div class="post-container">
+            <div class="post-text">
+              Managing group karaoke can sometimes be challenging.
+               However, I believe the hard work won't betray!
+               <br><br>Song: Release Sigh by Maeda Kaori, Kitou Akari, Suzushiro Sayumi and Watabe Sayumi (2.5-jigen no Ririsa ED2)
+            </div>
+            
+            <!-- Media Container in post, accommodating user that posts with media such as images or videos -->
+              <div class="media-container">
+                <video controls alt="Archduke Franz Ferdinand Video Upload">
+                  <source src="https://files.catbox.moe/xq8wi2.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <img src="assets/release-sigh.png" alt="Archduke Franz Ferdinand Picture Upload">
+              </div>
+            
+            <!-- Like and Comment Button in User Post -->
+            <div class="buttons-container">
+              <button>
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span>Like</span>
+              </button>
+              <button>
+                <i class="fa-solid fa-comment"></i>
+                <span>Comment</span>
+              </button>
+            </div>
+            
+            <!-- User Comments Container -->
+            <div class="comments-container">
+              <div class="comment">
+                <img src="assets/liyuu.jpg" alt="Commentor Profile Picture">
+                <div class="comment-content">
+                  <div class="commentor-name">Girl A</div>
+                  <div class="comment-text">Mamma Mia! We should do a cover together for the next event!
+                     Looking forward to work with you!
+                  </div>
+                  <a href="#" class="like-link">Like</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comments text input and buttons -->
+            <div class="comment-input-container">
+              <img src="assets/franz-ferdinand.jpg" alt="Profile Picture">
+              <input type="text" placeholder="Write a comment...">
+              <button><i class="fa-solid fa-image"></i></button>
+              <button><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </section>
+
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <section id="footer">
+        <div class="footer-container">
+          <div class="footer-link">
+            <ul>
+              <li>
+                <a href="#footer">Terms of Use</a>
+              </li>
+              <li>
+                <a href="#footer">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#footer">Cookie Settings</a>
+              </li>
+              <li>
+                <a href="#footer">Ad Choices</a>
+              </li>
+              <li>
+                <a href="#">Back to Top</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Karaokeism. This project is made by Christopher Lissants in adherence
+              to Web Programming assignment for The University of Arizona.
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
