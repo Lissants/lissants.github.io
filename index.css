@@ -1,0 +1,78 @@
+/* General Styling */
+*{
+  font-family: 'Poppins', serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: #e2e9eb;
+}
+
+/* Hero Banner Section */
+.hero-banner{
+  width: 100%;
+  height: 18.75rem;
+  background-image: url(hero.png);
+  background-size: cover;
+  background-position: center;
+  color: #f4ede5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-banner h1{
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #f4ede5;
+}
+
+.hero-banner p{
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #f4ede5;
+}
+
+/* Project Link Section */
+.project-links li{
+  list-style-type: none;
+  padding-bottom: 1rem;
+}
+
+.project-links li a{
+  text-decoration: none;
+  padding-bottom: 0.25rem;
+  color: #0c234b;
+}
+
+.project-links li a:hover{
+  color: #378dbd;
+}
+
+.main-container h1, p{
+  padding-bottom: 1rem;
+  font-weight: bold;
+}
+
+.main-container h1 a{
+  color: #ab0520;
+  text-decoration: none;
+}
+
+.main-container h1 a:hover{
+  color: #ef4056;
+}
+
+/* Utility Styles */
+.main-container{
+  max-width: 37.5rem;
+  margin: 1.25rem auto;
+  background-color: #e2e9eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+}
