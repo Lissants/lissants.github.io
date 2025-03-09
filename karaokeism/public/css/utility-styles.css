@@ -1,0 +1,218 @@
+/*Universal Styling Canvas for Karaokeism*/
+*{
+  font-family: "Poppins", serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: #e2e9eb;
+}
+
+/*Navigation Bar Menu*/
+header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  margin: 0;
+}
+
+.navbar-left{
+  margin-right: auto;
+}
+
+.navbar-center {
+  position: absolute;
+  left: 47%;
+}
+
+.navbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Hamburger Menu */
+.hamburger{
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #f4ede5;
+}
+
+/* Hide profile link when hamburger menu is visible */
+@media (max-width: 500px){
+  .navbar-left{
+    display: none;
+  }
+
+  .hamburger{
+    display: block;
+  }
+}
+
+/* Ensure focusable elements are visible */
+button:focus, input:focus, a:focus{
+  outline: 0.125rem solid #378dbd;
+  outline-offset: 0.125rem;
+}
+
+/* Search Bar Container */
+.search-bar-container {
+  position: relative;
+}
+
+.search-bar-container input {
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  border: 1px solid #f4ede5;
+  border-radius: 1rem;
+  outline: none;
+  width: 100%;
+}
+
+.search-bar-container .search-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ef4056;
+  position: absolute;
+  right: 0.5rem;
+  top: 30%;
+}
+
+.search-bar-container .search-icon:hover{
+  color: #ab0520;
+}
+
+/* Sign Out Button */
+.signout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f4ede5;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.signout-btn:hover {
+  color: #ab0520;
+}
+
+/* Profile Picture and Logo Styling */
+.profile-picture-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.logo-container {
+  height: 2.5rem;
+  width: auto;
+}
+
+/* General Navbar Styling */
+nav {
+  background-color: #0c234b;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav ul li a {
+  color: #f4ede5;
+  text-decoration: none;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+nav ul li a:hover {
+  background-color: #378dbd;
+  border-radius: 1rem;
+  padding: 0.25rem;
+}
+
+.footer-container{
+  background-color: #0c234b;
+  padding: 1rem;
+}
+
+.footer-link ul{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.footer-link ul li a{
+  color: #f4ede5;
+  text-decoration: none;
+}
+
+.footer-link ul li a:hover{
+  color: #ef4056;
+}
+
+.footer-copyright{
+  color: #f4ede5;
+  text-align: center;
+}
+
+/* Hero Banner Section */
+.hero-banner{
+  width: 100%;
+  height: 18.75rem;
+  background-image: url(../assets/cinematic\ flower.jpg);
+  background-size: cover;
+  background-position: center;
+  color: #f4ede5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-banner h1{
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #f4ede5;
+}
+
+.hero-banner p{
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #f4ede5;
+}
+
+.hero-banner span{
+  color: #81d3eb;
+  font-weight: bold;
+}
+
+.main-container{
+  max-width: 37.5rem;
+  margin: 1.25rem auto;
+  background-color: #e2e9eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+}

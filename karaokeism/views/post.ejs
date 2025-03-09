@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= post.getAuthorName() %>'s Post</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utility-styles.css">
+    <link rel="icon" href="../assets/monogram-hq.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Navigation Bar Section -->
+    <header>
+      <nav>
+        <ul class="navbar">
+          <li class="navbar-left">
+            <a href="/profiles/?id=<%= profile.getId() %>">
+              <div class="profile-picture-container">
+                <img src="../assets/<%= profile.getProfilePic() %>" alt="Profile Picture">
+              </div>
+              <p><%= profile.getDisplayName() %></p>
+            </a>
+          </li>
+          <li class="navbar-center">
+            <a href="/">
+              <img src="../assets/monogram-hq.png" alt="Karaokeism Logo" class="logo-container">
+            </a>
+          </li>
+          <li class="navbar-right">
+            <div class="search-bar-container">
+              <form action="/search" method="get">
+                <input type="text" name="query" placeholder="Search..." class="search-bar" aria-label="Search">
+                <button type="submit" class="search-icon">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+              </form>
+            </div>
+            <div>
+              <button class="signout-btn" aria-label="Sign Out">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Sign Out
+              </button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- User Post Section -->
+    <section id="user-post">
+      <div class="main-container">
+        <div class="post-profile-picture-container">
+          <img src="../assets/<%= profile.getProfilePic() %>" alt="Profile Picture">
+          <div class="display-name">
+            <a href="/profiles/?id=<%= post.getAuthorID() %>"><%= post.getAuthorName() %></a>
+          </div>
+        </div>
+        
+      <!-- User Post Container -->
+      <div class="post-container">
+        <div class="post-text">
+          <p><%= post.getContent() %></p>
+        </div>
+                
+          <!-- Media Container -->
+          <div class="media-container">
+            <% if (post.getMedia() && Object.keys(post.getMedia()).length > 0) { %>
+              <% if (post.getMedia().type === 'video') { %>
+                <video controls alt="<%= profile.getDisplayName() %> Video Upload">
+                  <source src="<%= post.getMedia().url %>" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              <% } else if (post.getMedia().type === 'image') { %>
+                <img src="<%= post.getMedia().url %>" alt="<%= profile.getDisplayName() %> Image Upload">
+              <% } else if (post.getMedia().type === 'audio') { %>
+                <audio controls>
+                  <source src="<%= post.getMedia().url %>" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              <% } else if (post.getMedia().type === 'mixed') { %>
+                <% post.getMedia().urls.forEach(url => { %>
+                  <% if (url.endsWith('.mp4')) { %>
+                    <video controls>
+                      <source src="<%= url %>" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  <% } else if (url.endsWith('.jpg') || url.endsWith('.png')) { %>
+                    <img src="<%= url %>" alt="<%= profile.getDisplayName() %> Image Upload">
+                  <% } else if (url.endsWith('.mp3')) { %>
+                    <audio controls>
+                      <source src="<%= url %>" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                    </audio>
+                  <% } %>
+                <% }) %>
+              <% } %>
+            <% } else { %>
+            <% } %>
+          </div>
+          
+          <!-- Like and Comment Button in User Post -->
+          <div class="buttons-container">
+            <button>
+              <i class="fa-solid fa-thumbs-up"></i>
+              <span>Like</span>
+            </button>
+            <button>
+              <i class="fa-solid fa-comment"></i>
+              <span>Comment</span>
+            </button>
+          </div>
+          
+          <!-- User Comments Container -->
+          <div class="comments-container">
+            <% if (post.getComments() && post.getComments().length > 0) { %>
+              <% post.getComments().forEach(comment => { %>
+                <div class="comment">
+                  <img src="../assets/<%= comment.profilePic %>" alt="Commentor Profile Picture">
+                  <div class="comment-content">
+                    <p><strong><%= comment.authorName %>:</strong> <%= comment.text %></p>
+                  </div>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <p>No comments yet.</p>
+            <% } %>
+          </div>
+
+          <!-- Comments text input and buttons -->
+          <div class="comment-input-container">
+            <img src="../assets/<%= profile.getProfilePic() %>" alt="Profile Picture">
+            <input type="text" placeholder="Write a comment...">
+            <button><i class="fa-solid fa-image"></i></button>
+            <button><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </div>  
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <section id="footer">
+        <div class="footer-container">
+          <div class="footer-link">
+            <ul>
+              <li><a href="#footer">Terms of Use</a></li>
+              <li><a href="#footer">Privacy Policy</a></li>
+              <li><a href="#footer">Cookie Settings</a></li>
+              <li><a href="#footer">Ad Choices</a></li>
+              <li><a href="#">Back to Top</a></li>
+            </ul>
+          </div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Karaokeism. This project is made by Christopher Gerard Lissants in adherence
+              to Web Programming assignment for The University of Arizona.
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
