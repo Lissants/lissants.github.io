@@ -1,0 +1,38 @@
+{
+  "name": "karaokeism",
+  "version": "1.0.0",
+  "description": "Project Description: A social media platform to connect fellow karaoke enthusiast whether it is to share their cover, teaching singing or mixing technique, or just to meet like-minded people.",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "connect-session-sequelize": "^7.1.7",
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "csurf": "^1.11.0",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "mailjet": "^0.0.1",
+    "multer": "^1.4.5-lts.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.14.1",
+    "node-fetch": "^2.7.0",
+    "node-mailjet": "^6.0.8",
+    "papaparse": "^5.5.2",
+    "pokedex-promise-v2": "^4.2.1",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Importing Stylesheet and Assets -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/utility-styles.css">
+  <link rel="stylesheet" href="../css/register.css">
+  <link rel="icon" href="/assets/monogram-hq.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" 
+      integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Importing Icons from fontawesome.com -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Importing Google Font - Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Importing Select2 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  
+  <title>Karaokeism | Register</title>
+</head>
+<body>
+
+  <!-- Hero Banner Section -->
+  <section id="hero-banner">
+    <div class="hero-banner">
+      <h1>Welcome to Karaokeism</h1>
+      <p>A place to <span>Connect</span> with Fellow Karaoke Enthusiast</p>
+    </div>
+  </section>
+
+  <header class="le-header">
+    <h1  class="title">Sign Up</h1>
+    <p class="subtitle">Enjoy <span>the Warmth</span> of the Online Karaoke Community!</p>
+  </header>
+
+  <section id="login-container">
+    <div class="main-container">
+      <div class="input-container">
+        <form action="/auth/register" method="POST">
+
+          <div class="field-container">
+            <label>Display Name:</label>
+            <input type="text" name="displayname" id="displayname" placeholder="John Fitzgerald Doe Jr.">
+            <span class="error-message" id="displayname-error"></span>
+          </div>
+
+          <div class="field-container">
+            <label>Username:</label>
+            <input type="text" name="username" id="username" placeholder="johndoe">
+            <span id="username-availability" class="availability-message"></span>
+            <span class="error-message" id="username-error"></span>
+          </div>
+
+          <div class="field-container">
+            <label>Email Address:</label>
+            <input type="text" name="email" id="email" placeholder="john.doe@mail.com">
+            <span id="email-availability" class="availability-message"></span>
+            <span class="error-message" id="email-error"></span>
+          </div>
+
+          <div class="field-container">
+            <label>Age:</label>
+            <input type="number" name="age" id="age" placeholder="21">
+            <span class="error-message" id="age-error"></span>
+          </div>
+
+          <div class="field-container">
+            <label>Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <button type="button" id="toggle-password">
+              <i class="fa-solid fa-eye fa-lg"></i>
+            </button>
+            <ul class="password-requirements">
+              <li>Minimum <span>8 characters</span></li>
+              <li>At least <span>one uppercase</span> and <span>lowercase letter</span></li>
+              <li>At least <span>one number</span> and <span>special character</span></li>
+            </ul>
+            <span class="error-message" id="password-error"></span>
+          </div>
+
+          <div class="field-container">
+            <label>Country:</label>
+            <select name="country" id="country">
+              <% countries.forEach(country => { %>
+                <option value="<%= country.code %>" 
+                  <%= country.code === autoCountry.toUpperCase() ? 'selected' : '' %>>
+                  <%= country.name %>
+                </option>
+              <% }) %>
+            </select>
+            <span class="error-message" id="country-error"></span>
+          </div>
+
+          <div class="terms">
+            <input type="checkbox" name="terms" id="terms" required>
+            <label>I agree to the <a href="/terms">Terms & Conditions</a></label>
+            <span class="error-message" id="terms-error"></span>
+          </div>
+
+          <div class="le-signup">
+              <button id="register-btn" type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+
+      <p class="login-link">Have an account? <a href="/auth/login">Sign In here!</a></p>
+
+    </div>
+  </section>
+
+      <!-- Footer Section -->
+    <footer>
+      <section id="footer">
+        <div class="footer-container">
+          <div class="footer-link">
+            <ul>
+              <li>
+                <a href="#footer">Terms of Use</a>
+              </li>
+              <li>
+                <a href="#footer">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#footer">Cookie Settings</a>
+              </li>
+              <li>
+                <a href="#footer">Ad Choices</a>
+              </li>
+              <li>
+                <a href="#">Back to Top</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Karaokeism. This project is made by Christopher Lissants in adherence
+              to Web Programming assignment for The University of Arizona.
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+  
+  <script>
+    $(document).ready(function() {
+      // Get initially selected value
+      const initialCountry = '<%= autoCountry %>';
+      
+      $('#country').select2({
+        placeholder: "Search your country...",
+        allowClear: true,
+        width: '100%',
+        minimumResultsForSearch: 2
+      }).val(initialCountry).trigger('change');
+    });
+  </script>
+  <script src="/js/registration.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</body>
+</html>

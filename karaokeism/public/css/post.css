@@ -1,0 +1,503 @@
+/* User Post Section */
+.main-post {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-container .post-text{
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.media-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.35rem, 1fr));
+  gap: 0.75rem;
+  max-width: 50rem;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.media-container img{
+  width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.media-container video{
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Post & Comment Action Buttons */
+.buttons-container{
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.buttons-container button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1rem;
+  color: #378dbd;
+}
+
+.save-post-btn {
+  margin-left: 50%;
+}
+
+.buttons-container button:hover{
+  color: #0c234b;
+}
+
+.user-post {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.user-post .main-container {
+  max-width: 37.5rem;
+  margin: 1.25rem auto;
+  background-color: #e2e9eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+  position: relative;
+}
+
+.user-post, .comment {
+  position: relative;
+}
+
+.post-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.comment-actions {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.25rem;
+  z-index: 2;
+}
+
+.edit-controls {
+  padding: 0.5rem;
+}
+
+.post-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.comment .comment-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.edit-post-btn, .delete-post-btn,
+.edit-comment-btn, .delete-comment-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #378dbd;
+  padding: 4px;
+}
+
+.edit-post-btn:hover, .delete-post-btn:hover,
+.edit-comment-btn:hover, .delete-comment-btn:hover {
+  color: #0c234b;
+}
+
+.edit-controls {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-post-input textarea {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #f4ede5;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  resize: vertical;
+  outline: none;
+}
+
+.edit-post-input, .edit-comment-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+/* Comment Container Section */
+.comments-container{
+  margin-bottom: 1.25rem;
+  background-color: #e2e9eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.comment{
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.comment:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.comment img{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.comment .comment-content{
+  flex:  1;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .commentor-name a{
+  text-decoration: none;
+  font-weight: bold;
+  color: #0c234b;
+  font-size: 1rem;
+}
+
+.comment .commentor-name a:hover{
+  color: #378dbd;
+}
+
+.comment .comment-text{
+  font-size: 1rem;
+  color: #606060;
+  margin: 0.25rem 0;
+}
+
+.comment .like-link{
+  font-size: 0.75rem;
+  color: #378dbd;
+  text-decoration: none;
+  order: 1;
+  margin-bottom: 0.5rem;
+}
+
+.comment .like-link:hover{
+  text-decoration: underline;
+  color: #0c234b;
+}
+
+.comment-input-container{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.comment-input-container img{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.comment-input-container input{
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #f4ede5;
+  border-radius: 1.25rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.comment-input-container button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #378dbd;
+}
+
+.comment-input-container button:hover{
+  color: #0c234b;
+}
+
+/* Like button active state */
+.like-btn.active {
+  color: #0c234b;
+}
+
+.like-btn.active i {
+  color: #0c234b;
+}
+
+/* Save Post button active state */
+.save-post-btn.active {
+  background-color: #0c234b;
+}
+
+.save-post-btn.active i {
+  background-color: #0c234b;
+}
+
+/* Comment styling */
+.comment {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+.comment img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.commentor-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.comment-text {
+  margin-bottom: 4px;
+}
+
+/* Comment media styles */
+.comment-media-btn {
+  background: none;
+  border: none;
+  color: #65676b;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 5px;
+  font-size: 1.2rem;
+}
+
+.comment-media-btn:hover {
+  color: #1b74e4;
+}
+
+.comment-media-preview {
+  margin: 10px 0;
+  position: relative;
+  display: none;
+}
+
+.comment-media-preview .media-preview-content {
+  max-width: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.remove-comment-media-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.comments-container .media-container {
+  margin: 0;              
+  max-width: none;        
+  grid-template-columns: 1fr;
+}
+
+.comment-like-count {
+  margin-left: 5px;
+  color: #65676b;
+  font-size: 0.9rem;
+}
+
+.comment-media-preview {
+  width: 100%;
+  display: block;
+  margin: 0.5rem 0 1rem; 
+}
+
+.comment-media-preview .media-preview-content {
+  margin: 0;
+  max-width: calc(100% - 3.25rem);
+}
+
+.comment-media-preview .media-preview-content > img,
+.comment-media-preview .media-preview-content > video,
+.comment-media-preview .media-preview-content > audio {
+  width: 100%;
+  display: block;
+}
+
+.remove-comment-media-btn {
+  position: static;     
+  margin-top: 0.25rem;
+  background: #ab0520; 
+  color: #f4ede5;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.remove-comment-media-btn:hover{
+  background: #ef4056;
+}
+
+/* Media Preview */
+#media-preview {
+  margin-top: 1rem;
+  position: relative;
+}
+
+.media-preview-content {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 2.5rem;
+}
+
+.media-preview-content img,
+.media-preview-content video {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.remove-media-btn {
+  position: absolute;
+  margin-top: 2rem;
+  top: 0.25rem;
+  right: 0.25rem;
+  background: #ab0520; 
+  color: #f4ede5;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#remove-media-btn:hover {
+  background: #ef4056;
+}
+
+/* Confirmation Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+  color: #ab0520;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.modal-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal-btn.cancel {
+  background-color: #e2e9eb;
+  color: #333;
+}
+
+.modal-btn.cancel:hover {
+  background-color: #f4ede5;
+}
+
+.modal-btn.confirm {
+  background-color: #ab0520;
+  color: white;
+}
+
+.modal-btn.confirm:hover {
+  background-color: #ef4056;
+}

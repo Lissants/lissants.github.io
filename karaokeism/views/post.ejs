@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= post.author.displayName %>'s Post</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utility-styles.css">
+    <link rel="stylesheet" href="../css/post.css">
+    <link rel="icon" href="../assets/monogram-hq.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <!-- Importing External JavaScript -->
+    <script src="../public/js/script.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" 
+        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+
+    <!-- Navigation Bar Section -->
+    <header>
+      <nav>
+        <ul class="navbar">
+          <li class="navbar-left">
+            <a href="/profiles?id=<%= currentUser?.id || 1 %>">
+              <div class="profile-picture-container">
+                <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+              </div>
+              <p><%= currentUser
+                ? (currentUser.displayName || currentUser.username)
+                : 'Guest User' %></p>
+            </a>
+          </li>
+          <li class="navbar-center">
+            <a href="/">
+              <img src="../assets/monogram-hq.png" alt="Karaokeism Logo" class="logo-container">
+            </a>
+          </li>
+
+          <li class="navbar-right">
+            <div class="search-bar-container">
+              <a href="/search">
+                <button class="search-icon">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+              </a>
+            </div>
+
+            <div>
+              <a href="/auth/logout">
+                <button class="signout-btn" aria-label="Sign Out">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                  Sign Out
+                </button>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- User Post Section -->
+    <main class="post-container">
+      <% if (post) { %>
+          <section class="main-post">
+              <div class="author-info">
+                  <img src="/assets/<%= post.author.profilePicture %>" 
+                       alt="<%= post.author.displayName %>'s profile picture">
+                  <div>
+                      <h2><%= post.author.displayName %></h2>
+                      <p class="post-time"><%= new Date(post.createdAt).toLocaleString() %></p>
+                  </div>
+              </div>
+              
+              <div class="post-content">
+                  <p><%= post.content %></p>
+                  <% if (post.media) { %>
+                      <div class="post-media">
+                          <% if (post.media.type === 'image') { %>
+                              <img src="<%= post.media.url %>" alt="Post image">
+                          <% } else if (post.media.type === 'video') { %>
+                              <video controls>
+                                  <source src="<%= post.media.url %>" type="video/mp4">
+                              </video>
+                          <% } else if (post.media.type === 'audio') { %>
+                              <audio controls>
+                                  <source src="<%= post.media.url %>" type="audio/mpeg">
+                              </audio>
+                          <% } %>
+                      </div>
+                  <% } %>
+              </div>
+
+              <div class="buttons-container">
+                <button class="like-btn" data-post-id="<%= post.id %>">
+                  <i class="fa-solid fa-thumbs-up"></i>
+                  <span>Like</span>
+                  <span class="like-count"><%= post.likes?.length || 0 %></span>
+                </button>
+                <button class="comment-toggle-btn">
+                  <i class="fa-solid fa-comment"></i>
+                  <span>Comment</span>
+                </button>
+                <button class="save-post-btn" data-post-id="<%= post.id %>">
+                  <i class="<%= post.isSaved ? 'fa-solid' : 'fa-regular' %> fa-bookmark"></i>
+                  <span><%= post.isSaved ? 'Saved' : 'Save' %></span>
+                </button>
+              </div>
+
+          <!-- User Comment Section -->
+          <div class="comments-container" id="comments-<%= post.id %>">
+            <% if (post.comments?.length) { %>
+              <% post.comments.forEach(comment => { %>
+                <div class="comment" data-comment-id="<%= comment.id %>">
+                  <% if (currentUser && comment.userId === currentUser.id) { %>
+                    <div class="comment-actions">
+                      <button class="edit-comment-btn" data-comment-id="<%= comment.id %>">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                      <button class="delete-comment-btn" data-comment-id="<%= comment.id %>">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  <% } %>
+                  <img src="/assets/<%= comment.author?.profilePicture || 'default-profile.png' %>" alt="Commentor Picture">
+                  <div class="comment-content">
+                    <div class="commentor-name">
+                      <a href="/profiles/?id=<%= comment.userId %>">
+                        <%= comment.author?.displayName || comment.author?.username || 'Anonymous' %>
+                      </a>
+                    </div>
+                    <div class="comment-text"><%= comment.content %></div>
+                    <% if (comment.media) { %>
+                      <div class="media-container">
+                        <% if (comment.media.type === 'image') { %>
+                          <img src="<%= comment.media.url %>" alt="Comment media">
+                        <% } else if (comment.media.type === 'video') { %>
+                          <video controls>
+                            <source src="<%= comment.media.url %>" type="video/mp4">
+                          </video>
+                        <% } else if (comment.media.type === 'audio') { %>
+                          <audio controls>
+                            <source src="<%= comment.media.url %>" type="audio/mpeg">
+                          </audio>
+                        <% } %>
+                      </div>
+                    <% } %>
+                    <div class="comment-bottom">
+                      <a href="#" class="like-link">Like</a>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <p>Be the first one to comment!</p>
+            <% } %>
+          </div>
+
+          <!-- Comment input -->
+          <div class="comment-input-container" data-post-id="<%= post.id %>">
+            <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+            <input type="text" class="comment-input" placeholder="Write a comment...">
+            <button class="comment-media-btn" aria-label="Add media">
+              <i class="fa-solid fa-image"></i>
+            </button>
+            <button class="comment-submit-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  <% } %>
+</section>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="modal">
+    <div class="modal-content">
+      <h3 id="modalTitle">Delete Post</h3>
+      <p id="modalMessage">Are you sure you want to delete this?</p>
+      <div class="modal-buttons">
+        <button id="modalCancel" class="modal-btn cancel">Cancel</button>
+        <button id="modalConfirm" class="modal-btn confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <section id="footer">
+        <div class="footer-container">
+          <div class="footer-link">
+            <ul>
+              <li><a href="#footer">Terms of Use</a></li>
+              <li><a href="#footer">Privacy Policy</a></li>
+              <li><a href="#footer">Cookie Settings</a></li>
+              <li><a href="#footer">Ad Choices</a></li>
+              <li><a href="#">Back to Top</a></li>
+            </ul>
+          </div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Karaokeism. This project is made by Christopher Gerard Lissants in adherence
+              to Web Programming assignment for The University of Arizona.
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+ 
+    <!-- Load JavaScript files -->
+    <script>
+      // Make app globally available
+      window.app = new KaraokeApp();
+    </script>
+    <!-- Load JavaScript files -->
+    <script src="/js/core.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/interactions.js"></script>
+    <script src="/js/posts.js"></script>
+    <script src="/js/saves.js"></script>
+  </body>
+</html>

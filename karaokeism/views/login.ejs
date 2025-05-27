@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Importing Stylesheet and Assets -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/utility-styles.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="icon" href="/assets/monogram-hq.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" 
+      integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Importing Icons from fontawesome.com -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Importing Google Font - Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <title>Karaokeism | Login</title>
+</head>
+<body>
+
+  <!-- Hero Banner Section -->
+  <section id="hero-banner">
+    <div class="hero-banner">
+      <h1>Welcome to Karaokeism</h1>
+      <p>A place to <span>Connect</span> with Fellow Karaoke Enthusiast</p>
+    </div>
+  </section>
+
+  <header class="le-header">
+    <h1  class="title">Sign In</h1>
+    <p class="subtitle">Enjoy <span>the Warmth</span> of the Online Karaoke Community!</p>
+  </header>
+
+  <section id="login-container">
+    <div class="main-container">
+      <div class="input-container">
+      <% if (typeof error !== 'undefined') { %>
+        <div class="error-message">
+          ⚠️ <%= error %>
+        </div>
+      <% } %>
+        <form action="/auth/login" method="POST" id="login-form">
+
+          <div class="field-container">
+            <label>Email Address/Username:</label>
+            <input type="text" name="identifier" id="identifier" placeholder="john.doe@mail.com" required>
+            <span class="error-message" id="identifier-error"></span>
+          </div>
+
+          <div class="field-container">
+            <label>Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <button type="button" id="toggle-password">
+              <i class="fa-solid fa-eye fa-lg"></i>
+            </button>
+            <span class="error-message" id="password-error"></span>
+          </div>
+
+          <div class="le-signup">
+            <button id="login-btn" type="submit" disabled>Login</button>
+          </div>
+        </form>
+      </div>
+
+      <p class="login-link">Have an account? <a href="/auth/register">Register here!</a></p>
+      <p class="login-link"><a href="/auth/reset-password">Forgot Password?</a></p>
+
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <section id="footer">
+      <div class="footer-container">
+        <div class="footer-link">
+          <ul>
+            <li>
+              <a href="#footer">Terms of Use</a>
+            </li>
+            <li>
+              <a href="#footer">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#footer">Cookie Settings</a>
+            </li>
+            <li>
+              <a href="#footer">Ad Choices</a>
+            </li>
+            <li>
+              <a href="#">Back to Top</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2025 Karaokeism. This project is made by Christopher Lissants in adherence
+            to Web Programming assignment for The University of Arizona.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script src="/js/login.js"></script>
+  </footer>
+</body>
+</html>

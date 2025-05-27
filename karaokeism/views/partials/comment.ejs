@@ -1,0 +1,79 @@
+<% 
+  const myRole      = currentUser?.role;
+  const commentRole = comment.author.role;
+  const amCommenter = currentUser && comment.userId === currentUser.id;
+
+  const canDeleteComment =
+    amCommenter                                          
+    || myRole === 'admin'                                
+    || (myRole === 'supermoderator' &&                   
+       ['user','moderator'].includes(commentRole))
+    || (myRole === 'moderator' &&                        
+       commentRole === 'user');
+%>
+
+<div class="comment" data-comment-id="<%= comment.id %>">
+  <img src="/assets/<%= comment.author?.profilePicture || 'default-profile.png' %>" alt="Commentor Picture">
+  
+  <div class="comment-content">
+    <div class="commentor-name">
+      <a href="/profiles/?id=<%= comment.userId %>">
+        <%= comment.author?.displayName || comment.author?.username || 'Anonymous' %>
+      </a>
+    </div>
+
+    <div class="comment-text"><%= comment.content %></div>
+
+    <% if (comment.media) { %>
+      <div class="media-container">
+        <% if (comment.media.type === 'image') { %>
+          <img src="<%= comment.media.url %>" alt="Comment media">
+        <% } else if (comment.media.type === 'video') { %>
+          <video controls><source src="<%= comment.media.url %>" type="video/mp4"></video>
+        <% } else { %>
+          <audio controls><source src="<%= comment.media.url %>" type="audio/mpeg"></audio>
+        <% } %>
+      </div>
+    <% } %>
+
+    <div class="comment-bottom">
+      <a href="#" class="like-link">Like</a>
+      <a href="#" class="reply-link">Reply</a>
+      <% if (comment.commentLikes?.length) { %>
+        <span class="comment-like-count"><%= comment.commentLikes.length %></span>
+      <% } %>
+      
+      <!-- Edit button only for the original author -->
+      <% if (amCommenter) { %>
+        <button class="edit-comment-btn" data-comment-id="<%= comment.id %>">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+      <% } %>
+
+      <!-- Delete button for author + elevated roles -->
+      <% if (canDeleteComment) { %>
+        <button class="delete-comment-btn" data-comment-id="<%= comment.id %>">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      <% } %>
+    </div>
+
+    <% if (comment.replies?.length) { %>
+      <div class="replies-container">
+        <% comment.replies.slice(0,2).forEach(reply => { %>
+          <%- include('comment', { comment: reply }) %>
+        <% }) %>
+        <% if (comment.replies.length > 2) { %>
+          <div class="hidden-replies">
+            <% comment.replies.slice(2).forEach(reply => { %>
+              <%- include('comment', { comment: reply }) %>
+            <% }) %>
+          </div>
+          <button class="show-more-replies" onclick="toggleReplies(this)">
+            Show <%= comment.replies.length - 2 %> more replies
+          </button>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</div>

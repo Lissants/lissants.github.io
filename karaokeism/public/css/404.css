@@ -1,0 +1,14 @@
+.main-container a, h1{
+  text-decoration: none;
+  font-weight: bold;
+  color: #ab0520;
+}
+
+.main-container p{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.main-container a:hover{
+  color: #ef4056;
+}

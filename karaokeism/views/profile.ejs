@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Karaokeism | Your Profile</title>
+    <!-- Importing Stylesheet and Assets -->
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utility-styles.css">
+    <link rel="icon" href="../assets/monogram-hq.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" 
+        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Importing External JavaScript -->
+    <script src="../public/js/script.js"></script>    
+
+    <!-- Importing Icons from fontawesome.com -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Importing Google Font - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation Bar Section -->
+    <header>
+      <nav>
+        <ul class="navbar">
+          <li class="navbar-left">
+            <a href="/profiles?id=<%= currentUser?.id || 1 %>">
+              <div class="profile-picture-container">
+                <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+              </div>
+              <p><%= currentUser
+                ? (currentUser.displayName || currentUser.username)
+                : 'Guest User' %></p>
+            </a>
+          </li>
+    
+          <li class="navbar-center">
+            <a href="/">
+              <img src="../assets/monogram-hq.png" alt="Karaokeism Logo" class="logo-container">
+            </a>
+          </li>
+
+          <li class="navbar-right">
+            <div class="search-bar-container">
+              <a href="/search">
+                <button class="search-icon">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+              </a>
+            </div>
+
+            <div>
+              <a href="/auth/logout">
+                <button class="signout-btn" aria-label="Sign Out">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                  Sign Out
+                </button>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section id="hero-banner">
+      <div class="hero-banner">
+        <h1>Welcome to Karaokeism</h1>
+        <p>A place to <span>Connect</span> with Fellow Karaoke Enthusiast</p>
+      </div>
+    </section>
+
+    <!-- User Profile Section -->
+    <section id="user-profile">
+      <div class="main-container">
+
+        <% if (canShowBanButton) { %>
+          <button
+            id="banToggleBtn"
+            class="btn-secondary"
+            data-user-id="<%= profile.id %>"
+          >
+            <%= profile.isBanned ? 'Unban User' : 'Ban User' %>
+          </button>
+        <% } %>
+
+        <% if (currentUser && currentUser.id === profile.id) { %>
+          <button id="editProfileBtn" class="edit-profile-btn">
+            <i class="fa-solid fa-pen"></i> Edit Profile
+          </button>
+        <% } %>
+        <div class="profile-container">
+          <img src="/assets/<%= users.profilePicture ? users.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+        </div>
+        <div class="profile-text-container">
+          <h1>
+            <%= profile.displayName || profile.username || 'Unknown User' %>
+          </h1>
+          <h3>
+            <%= profile.age || '—' %>
+            <% if (profile.country) { %>
+              , <%= profile.country %>
+            <% } %>
+          </h3>
+
+          <p class="member-info">
+            <strong><%= profile.role.charAt(0).toUpperCase() + profile.role.slice(1) %></strong>
+            since
+            <%= profile.memberSince %>
+          </p>
+
+          <p><%= profile.bio || '' %></p>
+        </div>
+        <% if (currentUser && currentUser.id === profile.id) { %>
+          <button id="viewSavedPostsBtn" class="btn-primary">
+            <i class="fa-solid fa-bookmark"></i> View Saved Posts
+          </button>
+        <% } %>
+
+        <div class="friend-actions">
+          <% if (currentUser && currentUser.id !== profile.id) { %>
+            <% if (friendshipStatus === 'none') { %>
+              <button class="friend-btn" data-action="request">Add Friend</button>
+            <% } else if (friendshipStatus === 'pending_sent') { %>
+              <button class="friend-btn" disabled>Request Sent</button>
+            <% } else if (friendshipStatus === 'pending_received') { %>
+              <button class="friend-btn" data-action="accept">Accept Request</button>
+              <button class="friend-btn" data-action="reject">Reject Request</button>
+            <% } else if (friendshipStatus === 'friends') { %>
+              <button class="friend-btn" data-action="remove">Remove Friend</button>
+            <% } %>
+          <% } %>
+        </div>
+
+      <!-- Profile Edit Modal -->
+      <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Edit Profile</h2>
+          <form id="profileForm" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="displayName">Display Name:</label>
+              <input type="text" id="displayName" name="displayName" value="<%= profile.displayName || '' %>">
+            </div>
+            
+            <div class="form-group">
+              <label for="bio">Bio:</label>
+              <textarea id="bio" name="bio"><%= profile.bio || '' %></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="number" id="age" name="age" value="<%= profile.age || '' %>">
+            </div>
+
+            <div class="form-group">
+              <label for="country">Location:</label>
+              <select id="country" name="country" required>
+                <% countries.forEach(c => { %>
+                  <option value="<%= c.name %>" 
+                    <%= profile.country===c.name ? 'selected' : '' %>>
+                    <%= c.name %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="profilePicture">Profile Picture:</label>
+              <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+              <div class="preview-container">
+                <img id="imagePreview" src="/assets/<%= profile.profilePicture %>" alt="Current Profile Picture">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="cancel-btn">Cancel</button>
+              <button type="submit" class="save-btn">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    <!-- Favourite Pokémon -->
+    <section id="pokemon">
+      <div class="main-container" id="pokemon-container">
+        <% if (pokemonData) { %>
+          <div class="pokemon-info">
+            <h3><%= profile.displayName %>'s Favorite Pokémon</h3>
+            <img src="<%= pokemonData.sprites.other['official-artwork'].front_default %>" alt="<%= pokemonData.name %>">
+            <p class="pokemon-name"><%= pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1) %></p>
+          </div>
+        <% } else { %>
+          <p>No favorite Pokémon selected.</p>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- Today's Weather Section -->
+    <section id="weather">
+      <div class="main-container" id="weather-container">
+        <% if (weatherData) { %>
+          <div class="weather-info">
+            <h3>Weather in <%= weatherData.name %></h3>
+            <img src="http://openweathermap.org/img/wn/<%= weatherData.weather[0].icon %>.png" alt="Weather Icon">
+            <p><%= Math.round(weatherData.main.temp) %>°C, <%= weatherData.weather[0].description %></p>
+          </div>
+        <% } else { %>
+          <p>Weather data unavailable.</p>
+        <% } %>
+      </div>
+    </section>
+
+     <!-- User Post Section -->
+     <section id="posts-container">
+      <% posts.forEach(post => { %>
+        <% if (post && post.id) { %>
+          <section class="user-post" data-post-id="<%= post.id %>">
+            <div class="main-container">
+              <% if (currentUser && post.AuthorID === currentUser.id) { %>
+                <div class="post-actions">
+                  <button class="edit-post-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="delete-post-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              <% } %>
+
+              <div class="post-profile-picture-container">
+                <img src="/assets/<%= post.author.profilePicture %>" alt="Profile Picture">
+                <div class="display-name">
+                  <a href="/profiles/?id=<%= post.AuthorID %>">
+                    <%= post.author.displayName || post.author.username %>
+                  </a>
+                </div>
+              </div>
+
+              <div class="post-container">
+                <div class="post-text"><%= post.content %></div>
+
+                <% if (post.media) { %>
+                  <div class="media-container">
+                    <% if (post.media.type === 'video') { %>
+                      <video controls>
+                        <source src="<%= post.media.url %>" type="video/mp4">
+                      </video>
+                    <% } else if (post.media.type === 'audio') { %>
+                      <audio controls>
+                        <source src="<%= post.media.url %>" type="audio/mpeg">
+                      </audio>
+                    <% } else { %>
+                      <img src="<%= post.media.url %>" alt="Post image">
+                    <% } %>
+                  </div>
+                <% } %>
+
+                <div class="buttons-container">
+                  <button class="like-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <span>Like</span>
+                    <span class="like-count"><%= post.likes?.length || 0 %></span>
+                  </button>
+                  <button class="comment-toggle-btn">
+                    <i class="fa-solid fa-comment"></i>
+                    <span>Comment</span>
+                  </button>
+                  <button class="save-post-btn" data-post-id="<%= post.id %>">
+                    <i class="<%= post.isSaved ? 'fa-solid' : 'fa-regular' %> fa-bookmark"></i>
+                    <span><%= post.isSaved ? 'Saved' : 'Save' %></span>
+                  </button>
+                </div>
+
+                <div class="comments-container" id="comments-<%= post.id %>">
+                  <% if (post.comments?.length) { %>
+                    <% post.comments.forEach(comment => { %>
+                      <% if (!comment.parentCommentId) { %>
+                        <%- include('partials/comment', { 
+                          comment: comment,
+                          showAllReplies: false 
+                        }) %>
+                      <% } %>
+                    <% }); %>              
+                  <% } else { %>          
+                    <p>Be the first one to comment!</p>
+                  <% } %>                 
+                </div>
+
+                <!-- Comment input -->
+                <div class="comment-input-container" data-post-id="<%= post.id %>">
+                  <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+                  <input type="text" class="comment-input" placeholder="Write a comment...">
+                  <button class="comment-media-btn" aria-label="Add media">
+                    <i class="fa-solid fa-image"></i>
+                  </button>
+                  <button class="comment-submit-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        <% } %> 
+      <% }); %> 
+    </section>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <h3 id="modalTitle">Delete Post</h3>
+        <p id="modalMessage">Are you sure you want to delete this?</p>
+        <div class="modal-buttons">
+          <button id="modalCancel" class="modal-btn cancel">Cancel</button>
+          <button id="modalConfirm" class="modal-btn confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <h3 id="modalTitle">Delete Post</h3>
+        <p id="modalMessage">Are you sure you want to delete this?</p>
+        <div class="modal-buttons">
+          <button id="modalCancel" class="modal-btn cancel">Cancel</button>
+          <button id="modalConfirm" class="modal-btn confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saved Posts Modal -->
+    <div id="savedPostsModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Saved Posts</h2>
+        <div id="saved-posts-container" class="posts-container"></div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <section id="footer">
+        <div class="footer-container">
+          <div class="footer-link">
+            <ul>
+              <li>
+                <a href="#footer">Terms of Use</a>
+              </li>
+              <li>
+                <a href="#footer">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#footer">Cookie Settings</a>
+              </li>
+              <li>
+                <a href="#footer">Ad Choices</a>
+              </li>
+              <li>
+                <a href="#">Back to Top</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Karaokeism. This project is made by Christopher Lissants in adherence
+              to Web Programming assignment for The University of Arizona.
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+
+    <!-- Load JavaScript files -->
+    <script>
+      window.app = new KaraokeApp();
+    </script>
+
+    <script id="profile-data" type="application/json">
+      <%- JSON.stringify({
+        currentUser: currentUser,
+        profile: profile,
+        posts: posts
+      }) %>
+    </script>
+
+    <script>
+      const profileData = JSON.parse(document.getElementById('profile-data').textContent);
+      window.appData = window.appData || {};
+      Object.assign(window.appData, profileData);
+    </script>
+
+    <script>
+      window.profileData = JSON.parse(
+        document.getElementById('profile-data').textContent || '{}'
+      );
+      
+      const currentUserId = window.profileData?.currentUser?.id || null;
+      window.currentUserId = currentUserId;
+    </script>
+
+    <!-- Load JavaScript files -->
+    <script src="/js/core.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/interactions.js"></script>
+    <script src="/js/posts.js"></script>
+    <script src="/js/profile.js"></script>
+    <script src="/js/saves.js"></script>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Karaokeism | Home</title>
+    <!-- Importing Stylesheet and Assets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utility-styles.css">
+    <link rel="icon" href="/assets/monogram-hq.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" 
+        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Importing Icons from fontawesome.com -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Importing Google Font - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- Navigation Bar Section -->
+    <header>
+      <nav>
+        <ul class="navbar">
+          <li class="navbar-left">
+            <a href="/profiles?id=<%= currentUser?.id || 1 %>">
+              <div class="profile-picture-container">
+                <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+              </div>
+              <p><%= currentUser
+                ? (currentUser.displayName || currentUser.username)
+                : 'Guest User' %></p>
+            </a>
+          </li>
+    
+          <li class="navbar-center">
+            <a href="/">
+              <img src="/assets/monogram-hq.png" alt="Karaokeism Logo" class="logo-container">
+            </a>
+          </li>
+
+          <li class="navbar-right">
+            <div class="search-bar-container">
+              <a href="/search">
+                <button class="search-icon">
+                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                </button>
+              </a>
+            </div>
+
+            <div>
+              <a href="/auth/logout">
+                <button class="signout-btn" aria-label="Sign Out">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                  Sign Out
+                </button>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    
+    <!-- Hero Banner Section -->
+    <section id="hero-banner">
+      <div class="hero-banner">
+        <h1>Welcome to Karaokeism</h1>
+        <p>A place to <span>Connect</span> with Fellow Karaoke Enthusiast</p>
+      </div>
+    </section>
+
+    <!-- Create a Post Section -->
+    <section id="post-creation">
+      <!-- Main Container -->
+      <div class="main-container">
+        <!-- Create Post Container -->
+        <div class="create-post-container">
+          <div class="create-post-text">Create a Post</div>
+          <div class="post-input-container">
+            <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+            <textarea id="post-content" placeholder="What's up today, fam?"></textarea>
+          </div>
+
+          <div class="post-buttons-container">
+            <button id="media-upload-btn">
+              <i class="fa-solid fa-image"></i>
+              <span>Media</span>
+            </button>
+            <button id="submit-post-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Post</span>
+            </button>
+          </div>
+
+          <div id="media-preview" style="display: none;">
+            <button id="remove-media-btn">Remove</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Post Section -->
+    <section id="posts-container">
+      <% posts.forEach(post => { %>
+        <% if (post && post.id) { %>
+          <section class="user-post" data-post-id="<%= post.id %>">
+            <div class="main-container">
+              <% if (currentUser && post.AuthorID === currentUser.id) { %>
+                <div class="post-actions">
+                  <button class="edit-post-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="delete-post-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              <% } %>
+
+              <% 
+
+              const myRole     = currentUser?.role;
+              const ownerRole  = post.author.role;
+              const amOwner    = currentUser && post.AuthorID === currentUser.id;
+
+              const canDeletePost =
+                amOwner
+                || (myRole === 'admin')
+                || (myRole === 'supermoderator' && ['user','moderator'].includes(ownerRole))
+                || (myRole === 'moderator' && ownerRole === 'user');
+              %>
+              <% if (canDeletePost) { %>
+                <div class="post-actions">
+                  <% if (amOwner) { %>
+                    <button class="edit-post-btn" data-post-id="<%= post.id %>">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                  <% } %>
+                  <button class="delete-post-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              <% } %>
+
+              <div class="post-profile-picture-container">
+                <img src="/assets/<%= post.author.profilePicture %>" alt="Profile Picture">
+                <div class="display-name">
+                  <a href="/profiles/?id=<%= post.AuthorID %>">
+                    <%= post.author.displayName || post.author.username %>
+                  </a>
+                </div>
+              </div>
+
+              <div class="post-container">
+                <div class="post-text"><%= post.content %></div>
+
+                <% if (post.media) { %>
+                  <div class="media-container">
+                    <% if (post.media.type === 'video') { %>
+                      <video controls>
+                        <source src="<%= post.media.url %>" type="video/mp4">
+                      </video>
+                    <% } else if (post.media.type === 'audio') { %>
+                      <audio controls>
+                        <source src="<%= post.media.url %>" type="audio/mpeg">
+                      </audio>
+                    <% } else { %>
+                      <img src="<%= post.media.url %>" alt="Post image">
+                    <% } %>
+                  </div>
+                <% } %>
+
+                <div class="buttons-container">
+                  <button class="like-btn" data-post-id="<%= post.id %>">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <span>Like</span>
+                    <span class="like-count"><%= post.likes?.length || 0 %></span>
+                  </button>
+                  <button class="comment-toggle-btn">
+                    <i class="fa-solid fa-comment"></i>
+                    <span>Comment</span>
+                  </button>
+                  <button class="save-post-btn" data-post-id="<%= post.id %>">
+                    <i class="<%= post.isSaved ? 'fa-solid' : 'fa-regular' %> fa-bookmark"></i>
+                    <span><%= post.isSaved ? 'Saved' : 'Save' %></span>
+                  </button>
+                </div>
+
+                <div class="comments-container" id="comments-<%= post.id %>">
+                  <% if (post.comments?.length) { %>
+                    <% post.comments.forEach(comment => { %>
+                      <% if (!comment.parentCommentId) { %>
+                        <%- include('partials/comment', { 
+                          comment: comment,
+                          showAllReplies: false 
+                        }) %>
+                      <% } %>
+                    <% }); %>              
+                  <% } else { %>          
+                    <p>Be the first one to comment!</p>
+                  <% } %>                 
+                </div>
+
+                <!-- Comment input -->
+                <div class="comment-input-container" data-post-id="<%= post.id %>">
+                  <img src="/assets/<%= currentUser ? currentUser.profilePicture : 'default-profile.png' %>" alt="Profile Picture">
+                  <input type="text" class="comment-input" placeholder="Write a comment...">
+                  <button class="comment-media-btn" aria-label="Add media">
+                    <i class="fa-solid fa-image"></i>
+                  </button>
+                  <button class="comment-submit-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        <% } %> 
+      <% }); %> 
+    </section>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <h3 id="modalTitle">Delete Post</h3>
+        <p id="modalMessage">Are you sure you want to delete this?</p>
+        <div class="modal-buttons">
+          <button id="modalCancel" class="modal-btn cancel">Cancel</button>
+          <button id="modalConfirm" class="modal-btn confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <section id="footer">
+        <div class="footer-container">
+          <div class="footer-link">
+            <ul>
+              <li>
+                <a href="#footer">Terms of Use</a>
+              </li>
+              <li>
+                <a href="#footer">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#footer">Cookie Settings</a>
+              </li>
+              <li>
+                <a href="#footer">Ad Choices</a>
+              </li>
+              <li>
+                <a href="#">Back to Top</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-copyright">
+            <p>&copy; 2025 Karaokeism. This project is made by Christopher Lissants in adherence
+              to Web Programming assignment for The University of Arizona.
+            </p>
+          </div>
+        </div>
+      </section>
+    </footer>
+
+    <!-- Initialise app data -->
+    <script id="app-data" type="application/json">
+      <%- JSON.stringify({
+        currentUser: currentUser,
+        posts: posts
+      }) %>
+    </script>
+    
+    <script>
+      window.appData = JSON.parse(document.getElementById('app-data').textContent);
+    </script>
+
+    <!-- Load JavaScript files -->
+    <script src="/js/core.js"></script>
+    <script src="/js/posts.js"></script>
+    <script src="/js/interactions.js"></script>
+    <script src="/js/saves.js"></script>
+    <script src="/js/search.js"></script>
+  </body>
+</html>
